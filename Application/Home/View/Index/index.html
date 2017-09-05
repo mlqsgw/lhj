@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no,width=device-width"/>
+    <meta name="share-title" content="我的幸运星 疯狂拉霸 最高翻10倍" />
+    <title>我的幸运星 疯狂拉霸 最高翻10倍</title>
+    <script type="text/javascript" src="__ROOT__/Public/home/js/jquery-1.9.1.min.js"></script>
+    <script src="__ROOT__/Public/static/script/carrot.ui.js" type="text/javascript"></script>
+    <script type="text/javascript" src="__ROOT__/Public/home/js/easing.js"></script>
+    <script type="text/javascript" src="__ROOT__/Public/home/js/scoll_bar.js"></script>
+    <link rel="stylesheet" href="__ROOT__/Public/home/css/lhj.css">
+</head>
+<body>
+<!--结果提示-->
+<div class="layer"></div>
+<p class="tip"></p>
+<img src="" class="animate_result" id="animate_result">
+<input type="hidden" id="status" value="0">
+<div class="head">
+    <img src="__ROOT__/Public/home/img/head.png">
+</div>
+<!--公告-->
+<div id="content_box">
+    <div id="content">
+        <volist name="draw_data" id="vo">
+            <p><?php echo mb_strimwidth($vo['data']['nickname'],0,40,'***')?>&nbsp;&nbsp;中了<{$vo.change_money}>积分</p>
+        </volist>
+    </div>
+    <div id="content_scroll"></div>
+</div>
+<!--游戏主体-->
+<div class="num_box">
+    <div class="num"></div>
+    <div class="num"></div>
+    <div class="num"></div>
+</div>
+<div class="code">
+    <a value="-" class="plus">-</a>
+   <ol>
+       <li><span class="tips">积分</span><span class="code_amount"><{$user_money}></span></li>
+       <li><image src="__ROOT__/Public/home/img/gold.png"></image><input type="text" id="detain" class="detain" value="10" oninput="changeDetain()"></li>
+   </ol>
+    <a value="+" class="add">+</a>
+</div>
+<div class="btn" id="bt">点击开始</div>
+<div class="rules">
+    <h4>游戏规则</h4>
+        <p>1.参与游戏资格，10积分即可参与一次，每次以10积分倍数押注，每次最高10000积分；</p>
+        <p>2.中奖积分为用户所押注的积分总数与倍数的乘积；</p>
+        <p>3.中奖规则，“777”的倍数为10倍，三个“元宝”的倍数为5倍，三个相同“水果”或“星座”的倍数为2倍，两个相同“水果”或“星座”的倍数为1倍;</p>
+        <p>4.本游戏输赢概率随机，不承诺用户最终盈利；</p>
+        <p>5.除另有说明外，不论用户的竞猜结果如何，用户投入的积分因参与活动而消耗完毕，无法进行返还。如用户竞猜获胜，则获得的积分将于1个工作日内发放到用户账户；</p>
+        <p>6.本游戏纯属娱乐，切勿沉迷。</p>
+    <h4>注意事项</h4>
+        <p>1.本平台有权根据活动参与情况，结束或提前结束用户参与活动的竞猜（指某轮活动不再接受用户的竞猜）；</p>
+        <p>2、如遇到不可抗力或其他客观原因导致活动竞猜无法继续进行，则用户投入将会全额返还到用户账户，本平台无需因此承担任何赔偿或补偿责任；</p>
+        <p>3、活动期间，如用户存在违规行为（包括但不限于机器作弊），本平台将取消用户的竞猜获奖资格，并有权依照相关规则处理。</p>
+        <p>4、本平台可根据活动举办的实际情况，在法律允许的范围内，对本活动规则进行变动或调整，相关变动或调整将公布在活动页面上。</p>
+</div>
+<!--<div class="panel">
+    <p class="reset"></p>
+</div>
+<audio preload="load" loop="loop" id="audio1">
+  <source src="style.mp3">
+</audio>  -->
+</body>
+<script>
+    $('content_box').scollBar({
+        content_box_id:'content_box',
+        content_id:'content',
+        content_scroll_id:'content_scroll',
+        speed:2000
+    });
+    function changeDetain(){
+        var code = parseInt(document.getElementById("detain").value);
+        if(code>0){
+            if(code>10){
+                if(code>parseInt($(".code_amount").html())){
+                    document.getElementById("detain").value =Math.floor(parseInt($(".code_amount").html())/10)*10;
+                }
+            }
+        }else{
+            document.getElementById("detain").value = "";
+        }
+    }
+    function res(){
+        $("#animate_result").attr('src', "__ROOT__/Public/home/img/win.gif");
+        $(".layer").fadeIn();
+        $(".animate_result").fadeIn();
+        var timer = setInterval(function(){
+            $('.layer').fadeOut();
+            $('.animate_result').fadeOut();
+            clearInterval(timer);
+        },2000);
+    }
+    var isBegin = false;
+    $(function(){
+        $('.btn').click(function(){
+            if(parseInt(document.getElementById("detain").value)>=10){
+                document.getElementById("detain").value = Math.floor(parseInt(document.getElementById("detain").value)/10)*10;
+                $(".layer").fadeIn();
+                document.getElementById("bt").disabled = true;
+                $(".btn").addClass("unability");
+                var money = parseInt(document.getElementById("detain").value);
+                var user_code = parseInt($(".code_amount").html());
+                reduce_integral(money,user_code);  //扣除积分
+            }else{
+                $(".tip").html("积分设置不足");
+                $(".tip").fadeIn();
+                var timer = setInterval(function(){
+                    $('.layer').fadeOut();
+                    $('.tip').fadeOut();
+                    clearInterval(timer);
+                },1800);
+            }
+
+        });
+    });
+
+    function reduce_integral(money,user_code) {
+        $.ajax({
+            type:"post",
+            url : "<{:u('Index/reduce_integral')}>",
+            data : {money:money,user_code:user_code},
+            dataType : "json",
+            success : function(data){
+                if (data['draw_status'] > 0) {
+                    $(".code_amount").html(data["user_money"]);
+                    do_draw();
+                } else if (data == -1) {
+                    window.location.href = "<{:U('Index/get_user_data')}>";
+                } else {
+                    $(".tip").html(data["message"]);
+                    $(".tip").fadeIn();
+                    var timer = setInterval(function(){
+                        $('.layer').fadeOut();
+                        $('.tip').fadeOut();
+                        clearInterval(timer);
+                        $(".btn").removeClass("unability");
+                    },1800);
+                }
+            }
+        });
+    }
+    function do_draw (){
+        var money = parseInt(document.getElementById("detain").value);
+        var user_code = parseInt($(".code_amount").html());
+        var u = 90;
+        $.ajax("<{:u('Index/do_game')}>",{
+            data : {money : money,user_code:user_code},
+            success : function (data){
+                if (data['draw_status'] > 0) {
+                    var result = data['draw_num'];//结果
+                    if(isBegin) return false;
+                    isBegin = true;
+                    $(".num").css('backgroundPositionY',0);
+                    var num_arr = (result+'').split('.');
+                    $(".num").each(function(index){
+                        var _num = $(this);
+                        setTimeout(function(){
+                            _num.animate({
+                                backgroundPositionY: (u*126) - (u*num_arr[index])+90
+                            },{
+                                duration: 5000+index*2000,
+                                easing: "easeInOutCirc",
+                                complete: function(){
+                                    if(index==2){
+                                        document.getElementById("detain").value = 10;
+                                        isBegin = false;
+                                        document.getElementById("bt").disabled = false;
+                                        $(".btn").removeClass("unability");
+                                        $(".code_amount").html(data['return_data']["user_money"]);
+                                        if (data["draw_status"]>0 && data["draw_status"] <5) {
+                                            res(); //中奖图片显示
+                                        } else {
+                                            $(".tip").html("对不起 未中奖");
+                                            $(".tip").fadeIn();
+                                            var timer = setInterval(function(){
+                                                $('.layer').fadeOut();
+                                                $('.tip').fadeOut();
+                                                clearInterval(timer);
+                                            },1800);
+                                        }
+                                    }
+                                }
+                            });
+                        }, index /2);
+                    });
+                } else {
+                    $(".tip").html(data["message"]);
+                    $(".tip").fadeIn();
+                    var timer = setInterval(function(){
+                        $('.layer').fadeOut();
+                        $('.tip').fadeOut();
+                        clearInterval(timer);
+                        $(".btn").removeClass("unability");
+                    },1800);
+                }
+            }
+        });
+    }
+
+//    点击加减
+    $(".plus").on('click',function(){
+        var code = document.getElementById("detain").value;
+        if(code>10){
+            code -=10;
+            document.getElementById("detain").value = code;
+        }
+    });
+    $(".add").on('click',function(){
+        var code = parseInt(document.getElementById("detain").value);
+        if(code<10000){
+            code +=10;
+            if(code>parseInt($(".code_amount").html())){
+                code =Math.floor( parseInt($(".code_amount").html())/10)*10;
+            }
+            document.getElementById("detain").value = code;
+        }
+    });
+</script>
+</html>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?bb58f3cf386e5fb8e63a0a3c3071738f";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>

@@ -1,0 +1,102 @@
+body {background-color:#f8f8f8;color:#333;}
+
+a {color:#333;}
+a:active {color:#69a1d0;}
+
+input[type="text"],input[type="password"] {background-color:#fff;color:#333;border-color:#d9d9d9;}
+input[type="text"]:focus,input[type="password"]:focus {border-color:#4f90c8;}
+input[type="button"],input[type="submit"],button,a.cui-button {background-color:#4f90c8;color:#fff;}
+input[type="button"]:active,input[type="submit"]:active,button:active,a.cui-button:active {background-color:#69a1d0;}
+input[type="button"]:disabled,input[type="submit"]:disabled,button:disabled,a.cui-button:disabled {background-color:#ccc;}
+
+.cui-font-major {color:#333!important;}
+.cui-font-minor {color:#666!important;}
+.cui-font-green {color:#090!important;}
+.cui-font-blue {color:#4f90c8!important;}
+.cui-font-red {color:#f00!important;}
+
+.cui-in {color:#f00!important;}
+.cui-out {color:#090!important;}
+
+.cui-icon-wechat,.cui-icon-qq,.cui-icon-weibo,.cui-icon-taobao {background:url(images/icon_social.png) no-repeat 0 0;background-size:32px 128px;}
+.cui-icon-qq {background-position:0 -32px;}
+.cui-icon-weibo {background-position:0 -64px;}
+.cui-icon-taobao {background-position:0 -96px;}
+
+.cui-group,.cui-group-tabs {background-color:#fff;border-color:#d9d9d9;}
+.cui-group-tabs ul li {color:#666;border-color:#d9d9d9;}
+.cui-group-tabs ul li a {color:#666;}
+.cui-group-tabs ul li.active a {color:#4f90c8;}
+
+.cui-title {background-color:#fff;border-color:#d9d9d9;}
+.cui-title span {color:#666;}
+.cui-title span.cui-title-search input[type="text"] {background-color:rgba(0,0,0,0.1);color:#666;}
+.cui-title span.cui-title-button input[type="button"],.cui-title span.cui-title-button input[type="submit"],.cui-title span.cui-title-button button,.cui-title span.cui-title-button a.cui-button {background-color:#4f90c8;color:#fff;}
+
+.cui-tabs {background-color:#fff;border-color:#d9d9d9;}
+.cui-tabs a.active {color:#4f90c8;}
+
+.cui-list {background-color:#fff;}
+.cui-list-header {background-color:#fff;border-color:#eee;}
+.cui-list-type {background-color:#fff;}
+.cui-list-type ul li {color:#666;border-color:#d9d9d9;}
+.cui-list-type ul li a {color:#666;}
+.cui-list-type ul li.active a {background-color:#eee;color:#4f90c8;}
+.cui-list-menu {background-color:rgba(0,0,0,0.3);}
+.cui-list-menu ul {background-color:#fff;border-color:#eee;}
+.cui-list-menu ul li {border-color:#eee;}
+.cui-list-menu ul li a {color:#666;}
+.cui-list-menu ul li a:active {background-color:#f6f6f6;color:#69a1d0;}
+.cui-list-content ul li {border-color:#eee;}
+.cui-list-content-loading {background:url(images/loading.gif) no-repeat 50% 50%;background-size:16px 16px;}
+.cui-list-content-more {color:#ccc;}
+.cui-list-content-detail span {color:#ccc;}
+.cui-list-content-detail span:first-child {color:#333;}
+.cui-list-content-text span {color:#ccc;}
+.cui-list-content-text span:first-child {color:#333;}
+.cui-list-content-plus {border-color:#eee;}
+.cui-list-content-plus a {border-color:#eee;}
+.cui-list-content-plus a:active {border-color:#69a1d0;}
+
+.cui-more:after {background:url(images/icon_more.png) no-repeat 0 50%;background-size:9px 16px;}
+.cui-line {border-color:#eee;}
+.cui-line .cui-icon {color:#4f90c8;}
+.cui-line .cui-line-title {color:#333;}
+.cui-line .cui-line-text {color:#ccc;}
+
+.cui-user-info a {color:#4f90c8;}
+.cui-user-info a:active {color:#69a1d0;}
+.cui-count {border-color:#d9d9d9;}
+.cui-count .cui-count-item {border-color:#d9d9d9;}
+.cui-count .cui-count-item span {color:#4f90c8;}
+
+.cui-slider-page span {background-color:#fff;}
+.cui-slider-page span.active {background-color:#f00;}
+
+.cui-page-tips {color:#666;}
+.cui-page p {color:#333;}
+.cui-page-icon em {color:#4f90c8;}
+
+.cui-form-input + .cui-form-input {border-color:#d9d9d9;}
+.cui-form-input + .cui-form-button {border-color:#d9d9d9;}
+.cui-form-input label select {background:#fff url(images/icon_more.png) no-repeat right 50%;background-size:9px 16px;}
+.cui-form-input label a {background-color:#4f90c8;color:#fff;}
+.cui-form-input label a:active {background-color:#69a1d0;}
+.cui-form-input label a.disabled {background-color:#ccc;}
+
+.cui-simple-form-text a {color:#4f90c8;}
+.cui-simple-form-text a:active {color:#69a1d0;}
+
+.cui-tips span {background-color:#666;color:#fff;}
+.cui-overlay {background-color:rgba(0,0,0,0.2);}
+.cui-loading {background:rgba(0,0,0,0.5) url(images/loading_128.gif) no-repeat 50% 50%;background-size:64px 64px;}
+.cui-dialog {background-color:rgba(0,0,0,0.5);}
+.cui-dialog-message {color:#fff;}
+.cui-dialog-buttons a {color:rgba(255,255,255,0.6);border-color:rgba(255,255,255,0.6);}
+.cui-dialog-buttons a:active {color:rgba(255,255,255,1);border-color:rgba(255,255,255,1);}
+
+.cui-progress-bar p {background-color:#ccc;}
+.cui-progress-bar p span {background-color:#4f90c8;}
+.cui-progress-bar div span {color:#69a1d0;}
+
+.cui-error {background-color:#ffc!important;border-color:#f00!important;}
